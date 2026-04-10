@@ -5,7 +5,7 @@ using System.Text;
 
 namespace dpiotrowski_lab2.Model.Rooms
 {
-    internal class Department
+    public class Department
     {
         public String Name { get; set; }
         public Address Address { get; set; }

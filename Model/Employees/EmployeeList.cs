@@ -4,13 +4,13 @@ using System.Text;
 
 namespace dpiotrowski_lab2.Model.Employees
 {
-    internal class EmployeeList
+    internal class EmployeeList : IObjectList<Employee>
     {
         private Dictionary<Guid, Employee> employees;
-        public List<Employee> Employees { get => employees.Values.ToList(); }
-        public event EventHandler<Employee>? EmployeeAdded;
-        public event EventHandler<Employee>? EmployeeRemoved;
-        public event EventHandler<Employee>? EmployeeUpdated;
+        public List<Employee> Elements { get => employees.Values.ToList(); }
+        public event EventHandler<Employee>? ElementAdded;
+        public event EventHandler<Employee>? ElementRemoved;
+        public event EventHandler<Employee>? ElementUpdated;
 
         public EmployeeList()
         {
@@ -21,14 +21,14 @@ namespace dpiotrowski_lab2.Model.Employees
         {
             this.employees.Add(employee.Id, employee);
 
-            this.EmployeeAdded?.Invoke(this, employee);
+            this.ElementAdded?.Invoke(this, employee);
         }
 
         public void Remove(Employee employee)
         {
             this.employees.Remove(employee.Id);
 
-            this.EmployeeRemoved?.Invoke(this, employee);
+            this.ElementRemoved?.Invoke(this, employee);
         }
 
         public void Update(Employee employee)
@@ -40,7 +40,7 @@ namespace dpiotrowski_lab2.Model.Employees
 
             this.employees[employee.Id] = employee;
 
-            this.EmployeeUpdated?.Invoke(this, employee);
+            this.ElementUpdated?.Invoke(this, employee);
         }
     }
 }

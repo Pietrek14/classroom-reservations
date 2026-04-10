@@ -4,7 +4,7 @@ using System.Text;
 
 namespace dpiotrowski_lab2.Model.Rooms
 {
-    internal enum RoomType
+    public enum RoomType
     {
         Computer,
         Seminar,

@@ -1,3 +1,5 @@
+using dpiotrowski_lab2.Model;
+
 namespace dpiotrowski_lab2
 {
     internal static class Program
@@ -5,8 +7,10 @@ namespace dpiotrowski_lab2
         [STAThread]
         static void Main()
         {
+            ModelManager model = new ModelManager();
+
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm());
+            Application.Run(new MainForm(model));
         }
     }
 }

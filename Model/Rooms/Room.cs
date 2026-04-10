@@ -4,7 +4,7 @@ using System.Text;
 
 namespace dpiotrowski_lab2.Model.Rooms
 {
-    internal class Room
+    public class Room
     {
         public Guid Id { get; }
         public uint Number { get; set; }

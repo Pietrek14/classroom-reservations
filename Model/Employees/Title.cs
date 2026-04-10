@@ -4,7 +4,7 @@ using System.Text;
 
 namespace dpiotrowski_lab2.Model.Employees
 {
-    internal class Title
+    public class Title
     {
         public String Prefix { get; set; }
         public String Suffix { get; set; }

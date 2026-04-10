@@ -4,7 +4,7 @@ using System.Text;
 
 namespace dpiotrowski_lab2.Model.Rooms.Addresses
 {
-    internal class Address
+    public class Address
     {
         public string City { get; set; }
         public PostalCode PostalCode { get; set; }

@@ -4,14 +4,14 @@ using System.Text;
 
 namespace dpiotrowski_lab2.Model.Rooms
 {
-    internal class RoomList
+    internal class RoomList : IObjectList<Room>
     {
         private Dictionary<Guid, Room> rooms;
-        public List<Room> Rooms { get => rooms.Values.ToList(); }
+        public List<Room> Elements { get => rooms.Values.ToList(); }
 
-        public event EventHandler<Room>? RoomAdded;
-        public event EventHandler<Room>? RoomRemoved;
-        public event EventHandler<Room>? RoomUpdated;
+        public event EventHandler<Room>? ElementAdded;
+        public event EventHandler<Room>? ElementRemoved;
+        public event EventHandler<Room>? ElementUpdated;
 
         public RoomList()
         {
@@ -22,14 +22,14 @@ namespace dpiotrowski_lab2.Model.Rooms
         {
             this.rooms.Add(room.Id, room);
             
-            this.RoomAdded?.Invoke(this, room);
+            this.ElementAdded?.Invoke(this, room);
         }
 
         public void Remove(Room room)
         {
             this.rooms.Remove(room.Id);
 
-            this.RoomRemoved?.Invoke(this, room);
+            this.ElementRemoved?.Invoke(this, room);
         }
 
         public void Update(Room room) {
@@ -40,7 +40,7 @@ namespace dpiotrowski_lab2.Model.Rooms
 
             this.rooms[room.Id] = room;
 
-            this.RoomUpdated?.Invoke(this, room);
+            this.ElementUpdated?.Invoke(this, room);
         }
     }
 }

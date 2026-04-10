@@ -4,13 +4,13 @@ using System.Text;
 
 namespace dpiotrowski_lab2.Model.Reservations
 {
-    internal class ReservationList
+    internal class ReservationList : IObjectList<Reservation>
     {
         private Dictionary<Guid, Reservation> reservations;
-        public List<Reservation> Reservations { get => reservations.Values.ToList(); }
-        public event EventHandler<Reservation>? ReservationAdded;
-        public event EventHandler<Reservation>? ReservationRemoved;
-        public event EventHandler<Reservation>? ReservationUpdated;
+        public List<Reservation> Elements { get => reservations.Values.ToList(); }
+        public event EventHandler<Reservation>? ElementAdded;
+        public event EventHandler<Reservation>? ElementRemoved;
+        public event EventHandler<Reservation>? ElementUpdated;
 
         public ReservationList()
         {
@@ -20,13 +20,13 @@ namespace dpiotrowski_lab2.Model.Reservations
         public void Add(Reservation reservation)
         {
             this.reservations.Add(reservation.Id, reservation);
-            this.ReservationAdded?.Invoke(this, reservation);
+            this.ElementAdded?.Invoke(this, reservation);
         }
 
         public void Remove(Reservation reservation)
         {
             this.reservations.Remove(reservation.Id);
-            this.ReservationRemoved?.Invoke(this, reservation);
+            this.ElementRemoved?.Invoke(this, reservation);
         }
 
         public void Update(Reservation reservation)
@@ -37,7 +37,7 @@ namespace dpiotrowski_lab2.Model.Reservations
             }
 
             this.reservations[reservation.Id] = reservation;
-            this.ReservationUpdated?.Invoke(this, reservation);
+            this.ElementUpdated?.Invoke(this, reservation);
         }
     }
 }
