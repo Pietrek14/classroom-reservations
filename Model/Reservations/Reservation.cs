@@ -5,7 +5,7 @@ using System.Text;
 
 namespace dpiotrowski_lab2.Model.Reservations
 {
-    public class Reservation
+    public class Reservation : IGuided
     {
         public Guid Id { get; }
         public Room Room { get; }

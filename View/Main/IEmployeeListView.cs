@@ -1,4 +1,4 @@
-﻿using dpiotrowski_lab2.Presenter.EmployeeList;
+﻿using dpiotrowski_lab2.Presenter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,8 @@ namespace dpiotrowski_lab2.View.Main
 {
     internal interface IEmployeeListView
     {
-        public void UpdateEmployeeList(List<EmployeeListItem> items);
+        public event EventHandler LoadEmployeeList;
+
+        public void UpdateEmployeeList(List<ListItem> items);
     }
 }

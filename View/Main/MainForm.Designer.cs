@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            TreeNode treeNode1 = new TreeNode("dr hab. Adam Zielonka, prof PŚ (8:30-10:00)");
-            TreeNode treeNode2 = new TreeNode("tech. Dawid Piotrowski (12:00-13:30)");
-            TreeNode treeNode3 = new TreeNode("403", new TreeNode[] { treeNode1, treeNode2 });
-            TreeNode treeNode4 = new TreeNode("306");
+            TreeNode treeNode5 = new TreeNode("dr hab. Adam Zielonka, prof PŚ (8:30-10:00)");
+            TreeNode treeNode6 = new TreeNode("tech. Dawid Piotrowski (12:00-13:30)");
+            TreeNode treeNode7 = new TreeNode("403", new TreeNode[] { treeNode5, treeNode6 });
+            TreeNode treeNode8 = new TreeNode("306");
             tbcMainLayout = new TabControl();
             tbpReservationList = new TabPage();
             pnlReservations = new Panel();
             dtpReservationDate = new DateTimePicker();
             btnAddReservation = new Button();
-            comboBox1 = new ComboBox();
+            cmbReservationDepartmentSelection = new ComboBox();
             treeView1 = new TreeView();
             tbpEmployeeList = new TabPage();
             pnlEmployees = new Panel();
@@ -45,10 +45,10 @@
             lsbEmployeeList = new ListBox();
             tbpRoomList = new TabPage();
             panel1 = new Panel();
-            label1 = new Label();
-            comboBox2 = new ComboBox();
+            lblDepartmentAddress = new Label();
+            cmbRoomDepartmentSelection = new ComboBox();
             button2 = new Button();
-            listBox1 = new ListBox();
+            lsbRoomList = new ListBox();
             tbcMainLayout.SuspendLayout();
             tbpReservationList.SuspendLayout();
             pnlReservations.SuspendLayout();
@@ -87,7 +87,7 @@
             pnlReservations.BackColor = Color.FromArgb(37, 37, 37);
             pnlReservations.Controls.Add(dtpReservationDate);
             pnlReservations.Controls.Add(btnAddReservation);
-            pnlReservations.Controls.Add(comboBox1);
+            pnlReservations.Controls.Add(cmbReservationDepartmentSelection);
             pnlReservations.Controls.Add(treeView1);
             pnlReservations.Location = new Point(37, 37);
             pnlReservations.Margin = new Padding(32);
@@ -117,15 +117,15 @@
             btnAddReservation.Text = "+";
             btnAddReservation.UseVisualStyleBackColor = false;
             // 
-            // comboBox1
+            // cmbReservationDepartmentSelection
             // 
-            comboBox1.Font = new Font("Segoe UI", 19F);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(82, 41);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(434, 43);
-            comboBox1.TabIndex = 3;
-            comboBox1.Text = "Wydział Matematyki Stosowanej";
+            cmbReservationDepartmentSelection.Font = new Font("Segoe UI", 14F);
+            cmbReservationDepartmentSelection.FormattingEnabled = true;
+            cmbReservationDepartmentSelection.Location = new Point(82, 51);
+            cmbReservationDepartmentSelection.Name = "cmbReservationDepartmentSelection";
+            cmbReservationDepartmentSelection.Size = new Size(434, 33);
+            cmbReservationDepartmentSelection.TabIndex = 3;
+            cmbReservationDepartmentSelection.Text = "Wydział Matematyki Stosowanej";
             // 
             // treeView1
             // 
@@ -136,15 +136,15 @@
             treeView1.Indent = 28;
             treeView1.Location = new Point(82, 145);
             treeView1.Name = "treeView1";
-            treeNode1.Name = "reservation_403_1";
-            treeNode1.Text = "dr hab. Adam Zielonka, prof PŚ (8:30-10:00)";
-            treeNode2.Name = "reservation_403_2";
-            treeNode2.Text = "tech. Dawid Piotrowski (12:00-13:30)";
-            treeNode3.Name = "room403";
-            treeNode3.Text = "403";
-            treeNode4.Name = "room306";
-            treeNode4.Text = "306";
-            treeView1.Nodes.AddRange(new TreeNode[] { treeNode3, treeNode4 });
+            treeNode5.Name = "reservation_403_1";
+            treeNode5.Text = "dr hab. Adam Zielonka, prof PŚ (8:30-10:00)";
+            treeNode6.Name = "reservation_403_2";
+            treeNode6.Text = "tech. Dawid Piotrowski (12:00-13:30)";
+            treeNode7.Name = "room403";
+            treeNode7.Text = "403";
+            treeNode8.Name = "room306";
+            treeNode8.Text = "306";
+            treeView1.Nodes.AddRange(new TreeNode[] { treeNode7, treeNode8 });
             treeView1.Size = new Size(767, 388);
             treeView1.TabIndex = 1;
             // 
@@ -210,36 +210,37 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(37, 37, 37);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(comboBox2);
+            panel1.Controls.Add(lblDepartmentAddress);
+            panel1.Controls.Add(cmbRoomDepartmentSelection);
             panel1.Controls.Add(button2);
-            panel1.Controls.Add(listBox1);
+            panel1.Controls.Add(lsbRoomList);
             panel1.Location = new Point(35, 36);
             panel1.Margin = new Padding(32);
             panel1.Name = "panel1";
             panel1.Size = new Size(931, 589);
             panel1.TabIndex = 4;
             // 
-            // label1
+            // lblDepartmentAddress
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 17F);
-            label1.ForeColor = SystemColors.Window;
-            label1.Location = new Point(76, 89);
-            label1.Name = "label1";
-            label1.Size = new Size(339, 31);
-            label1.TabIndex = 7;
-            label1.Text = "44-100 Gliwice, ul. Kaszubska 23";
+            lblDepartmentAddress.AutoSize = true;
+            lblDepartmentAddress.Font = new Font("Segoe UI", 12F);
+            lblDepartmentAddress.ForeColor = SystemColors.Window;
+            lblDepartmentAddress.Location = new Point(76, 89);
+            lblDepartmentAddress.Name = "lblDepartmentAddress";
+            lblDepartmentAddress.Size = new Size(236, 21);
+            lblDepartmentAddress.TabIndex = 7;
+            lblDepartmentAddress.Text = "44-100 Gliwice, ul. Kaszubska 23";
             // 
-            // comboBox2
+            // cmbRoomDepartmentSelection
             // 
-            comboBox2.Font = new Font("Segoe UI", 19F);
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(76, 43);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(434, 43);
-            comboBox2.TabIndex = 6;
-            comboBox2.Text = "Wydział Matematyki Stosowanej";
+            cmbRoomDepartmentSelection.Font = new Font("Segoe UI", 14F);
+            cmbRoomDepartmentSelection.FormattingEnabled = true;
+            cmbRoomDepartmentSelection.Location = new Point(76, 53);
+            cmbRoomDepartmentSelection.Name = "cmbRoomDepartmentSelection";
+            cmbRoomDepartmentSelection.Size = new Size(434, 33);
+            cmbRoomDepartmentSelection.TabIndex = 6;
+            cmbRoomDepartmentSelection.Text = "Wydział Matematyki Stosowanej";
+            cmbRoomDepartmentSelection.SelectedIndexChanged += RoomDepartmentSelected;
             // 
             // button2
             // 
@@ -255,18 +256,18 @@
             button2.Text = "+";
             button2.UseVisualStyleBackColor = false;
             // 
-            // listBox1
+            // lsbRoomList
             // 
-            listBox1.BackColor = Color.FromArgb(37, 37, 37);
-            listBox1.BorderStyle = BorderStyle.None;
-            listBox1.Font = new Font("Segoe UI", 15F);
-            listBox1.ForeColor = SystemColors.Window;
-            listBox1.FormattingEnabled = true;
-            listBox1.Items.AddRange(new object[] { "408 (sala wykladowa, 120 miejsc)", "306 (sala komputerowa, 24 miejsca)" });
-            listBox1.Location = new Point(76, 163);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(726, 364);
-            listBox1.TabIndex = 0;
+            lsbRoomList.BackColor = Color.FromArgb(37, 37, 37);
+            lsbRoomList.BorderStyle = BorderStyle.None;
+            lsbRoomList.Font = new Font("Segoe UI", 15F);
+            lsbRoomList.ForeColor = SystemColors.Window;
+            lsbRoomList.FormattingEnabled = true;
+            lsbRoomList.Items.AddRange(new object[] { "408 (sala wykladowa, 120 miejsc)", "306 (sala komputerowa, 24 miejsca)" });
+            lsbRoomList.Location = new Point(76, 134);
+            lsbRoomList.Name = "lsbRoomList";
+            lsbRoomList.Size = new Size(726, 392);
+            lsbRoomList.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -294,16 +295,16 @@
         private TreeView treeView1;
         private TabPage tbpRoomList;
         private Panel pnlReservations;
-        private ComboBox comboBox1;
+        private ComboBox cmbReservationDepartmentSelection;
         private Button btnAddReservation;
         private Panel pnlEmployees;
         private ListBox lsbEmployeeList;
         private Button button1;
         private Panel panel1;
         private Button button2;
-        private ListBox listBox1;
-        private Label label1;
-        private ComboBox comboBox2;
+        private ListBox lsbRoomList;
+        private Label lblDepartmentAddress;
+        private ComboBox cmbRoomDepartmentSelection;
         private DateTimePicker dtpReservationDate;
     }
 }

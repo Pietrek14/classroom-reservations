@@ -6,10 +6,10 @@ namespace dpiotrowski_lab2.Model.Rooms.Addresses
 {
     public class PostalCode
     {
-        public uint First { get; set; }
-        public uint Second { get; set; }
+        public string First { get; set; }
+        public string Second { get; set; }
 
-        public PostalCode(uint first, uint second)
+        public PostalCode(string first, string second)
         {
             this.First = first;
             this.Second = second;
@@ -17,7 +17,7 @@ namespace dpiotrowski_lab2.Model.Rooms.Addresses
 
         public override string ToString()
         {
-            return this.First.ToString() + " - " + this.Second.ToString();
+            return this.First + "-" + this.Second;
         }
     }
 }

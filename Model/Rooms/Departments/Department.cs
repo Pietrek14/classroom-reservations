@@ -3,15 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace dpiotrowski_lab2.Model.Rooms
+namespace dpiotrowski_lab2.Model.Rooms.Departments
 {
-    public class Department
+    public class Department : IGuided
     {
-        public String Name { get; set; }
-        public Address Address { get; set; }
+        public Guid Id { get; }
+        public String Name { get; }
+        public Address Address { get; }
 
         public Department(String name, Address address)
         {
+            this.Id = Guid.NewGuid();
             this.Name = name;
             this.Address = address;
         }

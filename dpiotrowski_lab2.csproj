@@ -2,19 +2,15 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows7.0</TargetFramework>
+    <TargetFramework>net10.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="View\RoomForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="View\EmployeeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="View\RoomForm.cs" />
+    <Compile Update="View\EmployeeForm.cs" />
   </ItemGroup>
 
 </Project>

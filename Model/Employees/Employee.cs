@@ -6,7 +6,7 @@ using System.Text;
 namespace dpiotrowski_lab2.Model.Employees
 {
  
-    public class Employee
+    public class Employee : IGuided
     {
         public Guid Id { get; }
         public String FirstName { get; }

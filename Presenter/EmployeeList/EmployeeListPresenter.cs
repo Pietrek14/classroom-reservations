@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace dpiotrowski_lab2.Presenter.EmployeeList
 {
-    internal class EmployeeListPresenter : IEmployeeListPresenter
+    internal class EmployeeListPresenter
     {
         private IObjectList<Employee> employeeList;
         private IEmployeeListView view;
@@ -22,14 +22,14 @@ namespace dpiotrowski_lab2.Presenter.EmployeeList
             this.employeeList.ElementAdded += UpdateEmployeeList;
             this.employeeList.ElementUpdated += UpdateEmployeeList;
             this.employeeList.ElementRemoved += UpdateEmployeeList;
-            this.view = view;
 
-            this.UpdateEmployeeList(null, null);
+            this.view.LoadEmployeeList += (object? sender, EventArgs e) => UpdateEmployeeList(sender, null);
         }
 
         private void UpdateEmployeeList(object? sender, Employee? _)
         {
-            employeeList.Elements.Select(employee => new EmployeeListItem(employee)).ToList();
+            var employeeListItems = this.employeeList.Elements.Select(employee => new ListItem(employee)).ToList();
+            this.view.UpdateEmployeeList(employeeListItems);
         }
     }
 }

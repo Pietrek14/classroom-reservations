@@ -1,21 +1,38 @@
-﻿using System;
+﻿using dpiotrowski_lab2.Model.Rooms.Departments;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace dpiotrowski_lab2.Model.Rooms
 {
-    public class Room
+    public class Room : IGuided
     {
         public Guid Id { get; }
-        public uint Number { get; set; }
-        public uint Capacity { get; set; }
-        public RoomType RoomType { get; set; }
+        public uint Number { get; }
+        public uint Capacity { get; }
+        public RoomType RoomType { get; }
+        public Department Department { get; }
 
-        public Room(uint number, uint capacity, RoomType roomType) {
+        public Room(uint number, uint capacity, RoomType roomType, Department department) {
             this.Id = Guid.NewGuid();
             this.Number = number;
             this.Capacity = capacity;
             this.RoomType = roomType;
+            this.Department = department;
+        }
+
+        public override string ToString()
+        {
+            String typeString = this.RoomType switch
+            {
+                RoomType.Computer => "komputerowa",
+                RoomType.Seminar => "ćwiczeniowa",
+                RoomType.Lecture => "wykładowa",
+                _ => throw new NotImplementedException()
+            };
+
+            // TODO: poprawne odmienianie rzeczownika
+            return $"{this.Number} (sala {typeString}, {this.Capacity} miejsc)";
         }
     }
 }
