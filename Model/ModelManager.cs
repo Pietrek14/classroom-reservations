@@ -25,10 +25,11 @@ namespace dpiotrowski_lab2.Model
             ReservationList = new ReservationList();
             DepartmentList = new DepartmentList();
 
-            DepartmentList.Add(new Department(
+            var mathematicsDepartment = new Department(
                 "Wydział Matematyki Stosowanej",
-                new Address("Gliwice", new PostalCode("44", "100"), "Kaszubska", "23"))
-            );
+                new Address("Gliwice", new PostalCode("44", "100"), "Kaszubska", "23"));
+
+            DepartmentList.Add(mathematicsDepartment);
             DepartmentList.Add(new Department(
                 "Wydział Automatyki, Elektroniki i Informatyki",
                 new Address("Gliwice", new PostalCode("44", "100"), "Akademicka", "16"))
@@ -37,6 +38,57 @@ namespace dpiotrowski_lab2.Model
                 "Wydział Transportu i Inżynierii Lotniczej",
                 new Address("Katowice", new PostalCode("40", "019"), "Zygmunta Krasińskiego", "8"))
             );
+
+            var room403 = new Room(403, 120, RoomType.Lecture, mathematicsDepartment);
+
+            RoomList.Add(room403);
+            RoomList.Add(new Room(406, 45, RoomType.Seminar, mathematicsDepartment));
+            RoomList.Add(new Room(306, 30, RoomType.Computer, mathematicsDepartment));
+
+            var adamZielonka = new Employee("Adam", "Zielonka", new Title("dr hab.", "prof. PŚ"));
+            var dawidPiotrowski = new Employee("Dawid", "Piotrowski", new Title("tech.", ""));
+            var beniaminStecula = new Employee("Beniamin", "Stecuła", new Title("mgr² inż.", ""));
+
+            EmployeeList.Add(adamZielonka);
+            EmployeeList.Add(dawidPiotrowski);
+            EmployeeList.Add(beniaminStecula);
+
+            var reservation1 = new Reservation(
+                room403,
+                adamZielonka,
+                new DateOnly(2026, 4, 12),
+                new TimeOnly(8, 30),
+                new TimeOnly(10, 00)
+            );
+
+            var reservation2 = new Reservation(
+                room403,
+                dawidPiotrowski,
+                new DateOnly(2026, 4, 12),
+                new TimeOnly(12, 00),
+                new TimeOnly(13, 30)
+            );
+
+            var reservation3 = new Reservation(
+                room403,
+                beniaminStecula,
+                new DateOnly(2026, 4, 12),
+                new TimeOnly(13, 45),
+                new TimeOnly(15, 15)
+            );
+
+            var reservation4 = new Reservation(
+                room403,
+                adamZielonka,
+                new DateOnly(2026, 4, 13),
+                new TimeOnly(10, 15),
+                new TimeOnly(11, 45)
+            );
+
+            ReservationList.Add(reservation1);
+            ReservationList.Add(reservation3);
+            ReservationList.Add(reservation2);
+            ReservationList.Add(reservation4);
         }
     }
 }

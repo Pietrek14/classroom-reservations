@@ -16,6 +16,8 @@ namespace dpiotrowski_lab2
 
             var employeeListPresenter = new EmployeeListPresenter(model.EmployeeList, mainForm);
             var roomListPresenter = new RoomListPresenter(model.RoomList, model.DepartmentList, mainForm);
+            var reservationListPresenter = new ReservationListPresenter(
+                model.ReservationList, model.RoomList, model.DepartmentList, mainForm);
 
             Application.Run(mainForm);
         }

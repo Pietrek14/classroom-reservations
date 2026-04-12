@@ -4,11 +4,12 @@ using dpiotrowski_lab2.View.Main;
 
 namespace dpiotrowski_lab2
 {
-    public partial class MainForm : Form, IEmployeeListView, IRoomListView
+    public partial class MainForm : Form, IEmployeeListView, IRoomListView, IReservationListView
     {
         public event EventHandler? LoadEmployeeList;
         public event EventHandler? LoadDepartmentList;
         public event EventHandler<Guid>? SelectDepartment;
+        public event EventHandler<DateOnly>? SelectDate;
 
         public MainForm()
         {
@@ -21,6 +22,7 @@ namespace dpiotrowski_lab2
 
             this.LoadEmployeeList?.Invoke(this, EventArgs.Empty);
             this.LoadDepartmentList?.Invoke(this, EventArgs.Empty);
+            this.setStartingDate();
         }
 
         public void UpdateEmployeeList(List<ListItem> employees)
@@ -43,13 +45,30 @@ namespace dpiotrowski_lab2
                 this.cmbRoomDepartmentSelection.Items.Add(department);
             }
 
-            if(departments.Count > 0)
+            if (departments.Count > 0)
             {
                 this.cmbReservationDepartmentSelection.SelectedIndex = 0;
                 this.cmbRoomDepartmentSelection.SelectedIndex = 0;
             }
+        }
 
-            this.RoomDepartmentSelected(null, null);
+        public void UpdateReservationList(Dictionary<ListItem, List<ListItem>> reservations)
+        {
+            this.trvReservationList.BeginUpdate();
+            this.trvReservationList.Nodes.Clear();
+
+            foreach (var department in reservations)
+            {
+                TreeNode departmentNode = new TreeNode(department.Key.Display);
+                foreach (var reservation in department.Value)
+                {
+                    TreeNode reservationNode = new TreeNode(reservation.Display);
+                    departmentNode.Nodes.Add(reservationNode);
+                }
+                this.trvReservationList.Nodes.Add(departmentNode);
+            }
+
+            this.trvReservationList.EndUpdate();
         }
 
         public void UpdateDepartmentAddress(string address)
@@ -63,16 +82,44 @@ namespace dpiotrowski_lab2
 
             foreach (ListItem room in rooms)
             {
-                this.lsbEmployeeList.Items.Add(room);
+                this.lsbRoomList.Items.Add(room);
             }
         }
 
-        private void RoomDepartmentSelected(object? sender, EventArgs? e)
+        private void departmentSelected(object sender, EventArgs e)
         {
-            if(this.cmbRoomDepartmentSelection.SelectedItem != null)
+            var cmbSender = (ComboBox)sender;
+
+            var selectedItem = (ListItem?)cmbSender.SelectedItem;
+            var selectedIndex = cmbSender.SelectedIndex;
+
+            if (selectedItem != null)
             {
-                this.SelectDepartment?.Invoke(this, ((ListItem)this.cmbRoomDepartmentSelection.SelectedItem).Value);
+                this.SelectDepartment?.Invoke(this, selectedItem.Value);
             }
+
+            // Update all other combo boxes
+            var comboBoxes = new ComboBox[] { this.cmbReservationDepartmentSelection, this.cmbRoomDepartmentSelection };
+
+            foreach (var comboBox in comboBoxes)
+            {
+                if (comboBox.SelectedIndex != selectedIndex)
+                {
+                    comboBox.SelectedIndex = cmbSender.SelectedIndex;
+                }
+            }
+        }
+
+        private void reservationDateSelected(object? sender, EventArgs? e)
+        {
+            DateOnly selectedDate = DateOnly.FromDateTime(this.dtpReservationDate.Value);
+            this.SelectDate?.Invoke(this, selectedDate);
+        }
+
+        private void setStartingDate()
+        {
+            this.dtpReservationDate.Value = DateTime.Now;
+            this.reservationDateSelected(null, null);
         }
     }
 }

@@ -38,7 +38,7 @@
             dtpReservationDate = new DateTimePicker();
             btnAddReservation = new Button();
             cmbReservationDepartmentSelection = new ComboBox();
-            treeView1 = new TreeView();
+            trvReservationList = new TreeView();
             tbpEmployeeList = new TabPage();
             pnlEmployees = new Panel();
             button1 = new Button();
@@ -88,7 +88,7 @@
             pnlReservations.Controls.Add(dtpReservationDate);
             pnlReservations.Controls.Add(btnAddReservation);
             pnlReservations.Controls.Add(cmbReservationDepartmentSelection);
-            pnlReservations.Controls.Add(treeView1);
+            pnlReservations.Controls.Add(trvReservationList);
             pnlReservations.Location = new Point(37, 37);
             pnlReservations.Margin = new Padding(32);
             pnlReservations.Name = "pnlReservations";
@@ -102,6 +102,7 @@
             dtpReservationDate.Name = "dtpReservationDate";
             dtpReservationDate.Size = new Size(200, 23);
             dtpReservationDate.TabIndex = 5;
+            dtpReservationDate.ValueChanged += reservationDateSelected;
             // 
             // btnAddReservation
             // 
@@ -126,16 +127,17 @@
             cmbReservationDepartmentSelection.Size = new Size(434, 33);
             cmbReservationDepartmentSelection.TabIndex = 3;
             cmbReservationDepartmentSelection.Text = "Wydział Matematyki Stosowanej";
+            cmbReservationDepartmentSelection.SelectedIndexChanged += departmentSelected;
             // 
-            // treeView1
+            // trvReservationList
             // 
-            treeView1.BackColor = Color.FromArgb(37, 37, 37);
-            treeView1.BorderStyle = BorderStyle.None;
-            treeView1.Font = new Font("Segoe UI", 17F);
-            treeView1.ForeColor = SystemColors.Window;
-            treeView1.Indent = 28;
-            treeView1.Location = new Point(82, 145);
-            treeView1.Name = "treeView1";
+            trvReservationList.BackColor = Color.FromArgb(37, 37, 37);
+            trvReservationList.BorderStyle = BorderStyle.None;
+            trvReservationList.Font = new Font("Segoe UI", 17F);
+            trvReservationList.ForeColor = SystemColors.Window;
+            trvReservationList.Indent = 28;
+            trvReservationList.Location = new Point(82, 145);
+            trvReservationList.Name = "trvReservationList";
             treeNode5.Name = "reservation_403_1";
             treeNode5.Text = "dr hab. Adam Zielonka, prof PŚ (8:30-10:00)";
             treeNode6.Name = "reservation_403_2";
@@ -144,9 +146,9 @@
             treeNode7.Text = "403";
             treeNode8.Name = "room306";
             treeNode8.Text = "306";
-            treeView1.Nodes.AddRange(new TreeNode[] { treeNode7, treeNode8 });
-            treeView1.Size = new Size(767, 388);
-            treeView1.TabIndex = 1;
+            trvReservationList.Nodes.AddRange(new TreeNode[] { treeNode7, treeNode8 });
+            trvReservationList.Size = new Size(767, 388);
+            trvReservationList.TabIndex = 1;
             // 
             // tbpEmployeeList
             // 
@@ -240,7 +242,7 @@
             cmbRoomDepartmentSelection.Size = new Size(434, 33);
             cmbRoomDepartmentSelection.TabIndex = 6;
             cmbRoomDepartmentSelection.Text = "Wydział Matematyki Stosowanej";
-            cmbRoomDepartmentSelection.SelectedIndexChanged += RoomDepartmentSelected;
+            cmbRoomDepartmentSelection.SelectedIndexChanged += departmentSelected;
             // 
             // button2
             // 
@@ -292,7 +294,7 @@
         private TabControl tbcMainLayout;
         private TabPage tbpEmployeeList;
         private TabPage tbpReservationList;
-        private TreeView treeView1;
+        private TreeView trvReservationList;
         private TabPage tbpRoomList;
         private Panel pnlReservations;
         private ComboBox cmbReservationDepartmentSelection;

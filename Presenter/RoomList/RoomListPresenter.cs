@@ -14,6 +14,8 @@ namespace dpiotrowski_lab2.Presenter.RoomList
         private IObjectList<Department> departmentList;
         private IRoomListView view;
 
+        private Guid selectedDepartmentId;
+
         public RoomListPresenter(IObjectList<Room> roomList, IObjectList<Department> departmentList, IRoomListView view)
         {
             this.roomList = roomList;
@@ -36,20 +38,26 @@ namespace dpiotrowski_lab2.Presenter.RoomList
 
         private void SetSelectedDepartment(Guid departmentId)
         {
+            this.selectedDepartmentId = departmentId;
+
             var department = this.departmentList.Elements.FirstOrDefault(department => department.Id == departmentId);
             if (department == null)
             {
                 throw new ArgumentException($"Department with id {departmentId} does not exist.");
             }
-            var roomsInDepartment = this.roomList.Elements.Where(room => room.Department.Id == departmentId).ToList();
-            var roomListItems = roomsInDepartment.Select(room => new ListItem(room)).ToList();
-            this.view.UpdateRoomList(roomListItems);
+            
+            this.UpdateRoomList(null, null);
             this.view.UpdateDepartmentAddress(department.Address.ToString());
         }
 
         private void UpdateRoomList(object? sender, Room? _)
         {
-            var roomListItems = this.roomList.Elements.Select(room => new ListItem(room)).ToList();
+            var roomsInDepartment = this.roomList.Elements
+                .Where(room => room.Department.Id == this.selectedDepartmentId)
+                .OrderBy(room => room.Number)
+                .ToList();
+
+            var roomListItems = roomsInDepartment.Select(room => new ListItem(room)).ToList();
             this.view.UpdateRoomList(roomListItems);
         }
 
