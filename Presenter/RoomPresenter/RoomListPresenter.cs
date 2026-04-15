@@ -4,15 +4,17 @@ using dpiotrowski_lab2.Model.Rooms.Departments;
 using dpiotrowski_lab2.View.Main;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
-namespace dpiotrowski_lab2.Presenter.RoomList
+namespace dpiotrowski_lab2.Presenter.RoomPresenter
 {
     internal class RoomListPresenter
     {
         private IObjectList<Room> roomList;
         private IObjectList<Department> departmentList;
         private IRoomListView view;
+        private RoomPresenter? roomPresenter = null;
 
         private Guid selectedDepartmentId;
 
@@ -34,6 +36,8 @@ namespace dpiotrowski_lab2.Presenter.RoomList
 
             this.view.LoadDepartmentList += (object? sender, EventArgs e) => UpdateDepartmentList(sender, null);
             this.view.SelectDepartment += (object? sender, Guid departmentId) => SetSelectedDepartment(departmentId);
+            this.view.SelectRoomToEdit += (object? sender, Guid roomId) => OpenRoomEdit(roomId);
+            this.view.AddRoom += (object? sender, EventArgs e) => OpenRoomEdit(null);
         }
 
         private void SetSelectedDepartment(Guid departmentId)
@@ -65,6 +69,12 @@ namespace dpiotrowski_lab2.Presenter.RoomList
         {
             var departmentListItems = this.departmentList.Elements.Select(department => new ListItem(department.Name, department.Id)).ToList();
             this.view.UpdateDepartmentList(departmentListItems);
+        }
+
+        private void OpenRoomEdit(Guid? roomId)
+        {
+            var roomEditView = this.view.OpenRoomEditView();
+            this.roomPresenter = new RoomPresenter(this.roomList, roomId, this.departmentList, roomEditView);
         }
     }
 }

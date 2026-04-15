@@ -1,4 +1,5 @@
 ﻿using dpiotrowski_lab2.Presenter;
+using dpiotrowski_lab2.View.RoomView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,12 @@ namespace dpiotrowski_lab2.View.Main
     {
         public event EventHandler LoadDepartmentList;
         public event EventHandler<Guid> SelectDepartment;
+        public event EventHandler<Guid> SelectRoomToEdit;
+        public event EventHandler AddRoom;
 
         public void UpdateDepartmentList(List<ListItem> items);
         public void UpdateDepartmentAddress(String address);
         public void UpdateRoomList(List<ListItem> items);
+        public IRoomEditView OpenRoomEditView();
     }
 }

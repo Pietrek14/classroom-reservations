@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dpiotrowski_lab2.Model.Rooms;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -17,16 +18,22 @@ namespace dpiotrowski_lab2.Model.Reservations
             this.reservations = new Dictionary<Guid, Reservation>();
         }
 
+        public Reservation Get(Guid elementId)
+        {
+            return this.reservations[elementId];
+        }
+
         public void Add(Reservation reservation)
         {
             this.reservations.Add(reservation.Id, reservation);
             this.ElementAdded?.Invoke(this, reservation);
         }
 
-        public void Remove(Reservation reservation)
+        public void Remove(Guid reservationId)
         {
-            this.reservations.Remove(reservation.Id);
-            this.ElementRemoved?.Invoke(this, reservation);
+            var removed = this.reservations[reservationId];
+            this.reservations.Remove(reservationId);
+            this.ElementRemoved?.Invoke(this, removed);
         }
 
         public void Update(Reservation reservation)

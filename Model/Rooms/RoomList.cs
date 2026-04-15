@@ -18,6 +18,11 @@ namespace dpiotrowski_lab2.Model.Rooms
             this.rooms = new Dictionary<Guid, Room>();
         }
 
+        public Room Get(Guid elementId)
+        {
+            return this.rooms[elementId];
+        }
+
         public void Add(Room room)
         {
             this.rooms.Add(room.Id, room);
@@ -25,11 +30,13 @@ namespace dpiotrowski_lab2.Model.Rooms
             this.ElementAdded?.Invoke(this, room);
         }
 
-        public void Remove(Room room)
+        public void Remove(Guid roomId)
         {
-            this.rooms.Remove(room.Id);
+            var removed = this.rooms[roomId];
 
-            this.ElementRemoved?.Invoke(this, room);
+            this.rooms.Remove(roomId);
+
+            this.ElementRemoved?.Invoke(this, removed);
         }
 
         public void Update(Room room) {

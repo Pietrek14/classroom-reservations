@@ -19,6 +19,11 @@ namespace dpiotrowski_lab2.Model.Rooms
             this.departments = new Dictionary<Guid, Department>();
         }
 
+        public Department Get(Guid elementId)
+        {
+            return this.departments[elementId];
+        }
+
         public void Add(Department department)
         {
             this.departments.Add(department.Id, department);
@@ -26,11 +31,13 @@ namespace dpiotrowski_lab2.Model.Rooms
             this.ElementAdded?.Invoke(this, department);
         }
 
-        public void Remove(Department department)
+        public void Remove(Guid departmentId)
         {
-            this.departments.Remove(department.Id);
+            var removed = this.departments[departmentId];
 
-            this.ElementRemoved?.Invoke(this, department);
+            this.departments.Remove(departmentId);
+
+            this.ElementRemoved?.Invoke(this, removed);
         }
 
         public void Update(Department department)

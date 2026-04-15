@@ -35,12 +35,11 @@
             lblRoomNumber = new Label();
             lblRoomType = new Label();
             lblCapacity = new Label();
-            numRoomNumber = new NumericUpDown();
-            comboBox1 = new ComboBox();
+            cmbRoomType = new ComboBox();
             numCapacity = new NumericUpDown();
             lblDepartmentAddress = new Label();
             cmbDepartment = new ComboBox();
-            ((System.ComponentModel.ISupportInitialize)numRoomNumber).BeginInit();
+            tbxRoomNumber = new TextBox();
             ((System.ComponentModel.ISupportInitialize)numCapacity).BeginInit();
             SuspendLayout();
             // 
@@ -68,6 +67,7 @@
             btnAddRoom.TabIndex = 19;
             btnAddRoom.Text = "Dodaj salę";
             btnAddRoom.UseVisualStyleBackColor = false;
+            btnAddRoom.Click += addRoom;
             // 
             // btnEditRoom
             // 
@@ -84,6 +84,7 @@
             btnEditRoom.Text = "Edytuj salę";
             btnEditRoom.UseVisualStyleBackColor = false;
             btnEditRoom.Visible = false;
+            btnEditRoom.Click += editRoom;
             // 
             // btnDeleteRoom
             // 
@@ -100,6 +101,7 @@
             btnDeleteRoom.Text = "Usuń salę";
             btnDeleteRoom.UseVisualStyleBackColor = false;
             btnDeleteRoom.Visible = false;
+            btnDeleteRoom.Click += deleteRoom;
             // 
             // lblRoomNumber
             // 
@@ -134,27 +136,22 @@
             lblCapacity.TabIndex = 25;
             lblCapacity.Text = "pojemność:";
             // 
-            // numRoomNumber
+            // cmbRoomType
             // 
-            numRoomNumber.Font = new Font("Segoe UI", 11F);
-            numRoomNumber.Location = new Point(179, 160);
-            numRoomNumber.Name = "numRoomNumber";
-            numRoomNumber.Size = new Size(204, 27);
-            numRoomNumber.TabIndex = 30;
-            // 
-            // comboBox1
-            // 
-            comboBox1.Font = new Font("Segoe UI", 11F);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(179, 203);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(204, 28);
-            comboBox1.TabIndex = 31;
+            cmbRoomType.Font = new Font("Segoe UI", 11F);
+            cmbRoomType.FormattingEnabled = true;
+            cmbRoomType.Items.AddRange(new object[] { "wykładowa", "komputerowa", "ćwiczeniowa" });
+            cmbRoomType.Location = new Point(179, 203);
+            cmbRoomType.Name = "cmbRoomType";
+            cmbRoomType.Size = new Size(204, 28);
+            cmbRoomType.TabIndex = 31;
+            cmbRoomType.Text = "wykładowa";
             // 
             // numCapacity
             // 
             numCapacity.Font = new Font("Segoe UI", 11F);
             numCapacity.Location = new Point(179, 249);
+            numCapacity.Maximum = new decimal(new int[] { 500, 0, 0, 0 });
             numCapacity.Name = "numCapacity";
             numCapacity.Size = new Size(204, 27);
             numCapacity.TabIndex = 32;
@@ -179,6 +176,15 @@
             cmbDepartment.Size = new Size(281, 28);
             cmbDepartment.TabIndex = 33;
             cmbDepartment.Text = "Wydział Matematyki Stosowanej";
+            cmbDepartment.SelectedIndexChanged += selectedDepartment;
+            // 
+            // tbxRoomNumber
+            // 
+            tbxRoomNumber.Font = new Font("Segoe UI", 11F);
+            tbxRoomNumber.Location = new Point(179, 159);
+            tbxRoomNumber.Name = "tbxRoomNumber";
+            tbxRoomNumber.Size = new Size(204, 27);
+            tbxRoomNumber.TabIndex = 35;
             // 
             // RoomForm
             // 
@@ -186,11 +192,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(30, 30, 30);
             ClientSize = new Size(800, 450);
+            Controls.Add(tbxRoomNumber);
             Controls.Add(lblDepartmentAddress);
             Controls.Add(cmbDepartment);
             Controls.Add(numCapacity);
-            Controls.Add(comboBox1);
-            Controls.Add(numRoomNumber);
+            Controls.Add(cmbRoomType);
             Controls.Add(lblCapacity);
             Controls.Add(lblRoomType);
             Controls.Add(lblRoomNumber);
@@ -200,7 +206,6 @@
             Controls.Add(lblRoomHeader);
             Name = "RoomForm";
             Text = "Sala";
-            ((System.ComponentModel.ISupportInitialize)numRoomNumber).EndInit();
             ((System.ComponentModel.ISupportInitialize)numCapacity).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -221,10 +226,10 @@
         private Label lblRoomNumber;
         private Label lblRoomType;
         private Label lblCapacity;
-        private NumericUpDown numRoomNumber;
-        private ComboBox comboBox1;
+        private ComboBox cmbRoomType;
         private NumericUpDown numCapacity;
         private Label lblDepartmentAddress;
         private ComboBox cmbDepartment;
+        private TextBox tbxRoomNumber;
     }
 }

@@ -8,13 +8,23 @@ namespace dpiotrowski_lab2.Model.Rooms
     public class Room : IGuided
     {
         public Guid Id { get; }
-        public uint Number { get; }
+        public string Number { get; }
         public uint Capacity { get; }
         public RoomType RoomType { get; }
         public Department Department { get; }
 
-        public Room(uint number, uint capacity, RoomType roomType, Department department) {
+        public Room(string number, uint capacity, RoomType roomType, Department department)
+        {
             this.Id = Guid.NewGuid();
+            this.Number = number;
+            this.Capacity = capacity;
+            this.RoomType = roomType;
+            this.Department = department;
+        }
+
+        public Room(Guid id, string number, uint capacity, RoomType roomType, Department department)
+        {
+            this.Id = id;
             this.Number = number;
             this.Capacity = capacity;
             this.RoomType = roomType;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dpiotrowski_lab2.Model
 {
-    public interface IObjectList<TElement>
+    public interface IObjectList<TElement> where TElement : IGuided
     {
         public event EventHandler<TElement>? ElementAdded;
         public event EventHandler<TElement>? ElementRemoved;
@@ -15,8 +15,9 @@ namespace dpiotrowski_lab2.Model
 
         public List<TElement> Elements { get; }
 
+        public TElement Get(Guid elementId);
         public void Add(TElement element);
-        public void Remove(TElement element);
+        public void Remove(Guid elementId);
         public void Update(TElement element);
     }
 }

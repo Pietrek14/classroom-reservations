@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dpiotrowski_lab2.Model.Rooms;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -17,6 +18,11 @@ namespace dpiotrowski_lab2.Model.Employees
             this.employees = new Dictionary<Guid, Employee>();
         }
 
+        public Employee Get(Guid elementId)
+        {
+            return this.employees[elementId];
+        }
+
         public void Add(Employee employee)
         {
             this.employees.Add(employee.Id, employee);
@@ -24,11 +30,13 @@ namespace dpiotrowski_lab2.Model.Employees
             this.ElementAdded?.Invoke(this, employee);
         }
 
-        public void Remove(Employee employee)
+        public void Remove(Guid employeeId)
         {
-            this.employees.Remove(employee.Id);
+            var removed = this.employees[employeeId];
 
-            this.ElementRemoved?.Invoke(this, employee);
+            this.employees.Remove(employeeId);
+
+            this.ElementRemoved?.Invoke(this, removed);
         }
 
         public void Update(Employee employee)

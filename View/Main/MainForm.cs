@@ -1,6 +1,9 @@
 using dpiotrowski_lab2.Model;
 using dpiotrowski_lab2.Presenter;
 using dpiotrowski_lab2.View.Main;
+using dpiotrowski_lab2.View.RoomView;
+using System.Diagnostics;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace dpiotrowski_lab2
 {
@@ -10,6 +13,8 @@ namespace dpiotrowski_lab2
         public event EventHandler? LoadDepartmentList;
         public event EventHandler<Guid>? SelectDepartment;
         public event EventHandler<DateOnly>? SelectDate;
+        public event EventHandler<Guid>? SelectRoomToEdit;
+        public event EventHandler? AddRoom;
 
         public MainForm()
         {
@@ -86,6 +91,13 @@ namespace dpiotrowski_lab2
             }
         }
 
+        public IRoomEditView OpenRoomEditView()
+        {
+            var roomEditForm = new RoomForm();
+            roomEditForm.Show();
+            return roomEditForm;
+        }
+
         private void departmentSelected(object sender, EventArgs e)
         {
             var cmbSender = (ComboBox)sender;
@@ -120,6 +132,21 @@ namespace dpiotrowski_lab2
         {
             this.dtpReservationDate.Value = DateTime.Now;
             this.reservationDateSelected(null, null);
+        }
+
+        private void roomSelected(object sender, EventArgs e)
+        {
+            var selected = lsbRoomList.SelectedItem as ListItem;
+
+            if (selected != null)
+            {
+                this.SelectRoomToEdit?.Invoke(this, selected.Value);
+            }
+        }
+
+        private void addRoom(object sender, EventArgs e)
+        {
+            this.AddRoom?.Invoke(this, EventArgs.Empty);
         }
     }
 }

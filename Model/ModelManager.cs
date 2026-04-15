@@ -39,11 +39,11 @@ namespace dpiotrowski_lab2.Model
                 new Address("Katowice", new PostalCode("40", "019"), "Zygmunta Krasińskiego", "8"))
             );
 
-            var room403 = new Room(403, 120, RoomType.Lecture, mathematicsDepartment);
+            var room403 = new Room("403a", 120, RoomType.Lecture, mathematicsDepartment);
 
             RoomList.Add(room403);
-            RoomList.Add(new Room(406, 45, RoomType.Seminar, mathematicsDepartment));
-            RoomList.Add(new Room(306, 30, RoomType.Computer, mathematicsDepartment));
+            RoomList.Add(new Room("406", 45, RoomType.Seminar, mathematicsDepartment));
+            RoomList.Add(new Room("306", 30, RoomType.Computer, mathematicsDepartment));
 
             var adamZielonka = new Employee("Adam", "Zielonka", new Title("dr hab.", "prof. PŚ"));
             var dawidPiotrowski = new Employee("Dawid", "Piotrowski", new Title("tech.", ""));

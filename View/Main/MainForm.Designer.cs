@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            TreeNode treeNode5 = new TreeNode("dr hab. Adam Zielonka, prof PŚ (8:30-10:00)");
-            TreeNode treeNode6 = new TreeNode("tech. Dawid Piotrowski (12:00-13:30)");
-            TreeNode treeNode7 = new TreeNode("403", new TreeNode[] { treeNode5, treeNode6 });
-            TreeNode treeNode8 = new TreeNode("306");
+            TreeNode treeNode1 = new TreeNode("dr hab. Adam Zielonka, prof PŚ (8:30-10:00)");
+            TreeNode treeNode2 = new TreeNode("tech. Dawid Piotrowski (12:00-13:30)");
+            TreeNode treeNode3 = new TreeNode("403", new TreeNode[] { treeNode1, treeNode2 });
+            TreeNode treeNode4 = new TreeNode("306");
             tbcMainLayout = new TabControl();
             tbpReservationList = new TabPage();
             pnlReservations = new Panel();
@@ -138,15 +138,15 @@
             trvReservationList.Indent = 28;
             trvReservationList.Location = new Point(82, 145);
             trvReservationList.Name = "trvReservationList";
-            treeNode5.Name = "reservation_403_1";
-            treeNode5.Text = "dr hab. Adam Zielonka, prof PŚ (8:30-10:00)";
-            treeNode6.Name = "reservation_403_2";
-            treeNode6.Text = "tech. Dawid Piotrowski (12:00-13:30)";
-            treeNode7.Name = "room403";
-            treeNode7.Text = "403";
-            treeNode8.Name = "room306";
-            treeNode8.Text = "306";
-            trvReservationList.Nodes.AddRange(new TreeNode[] { treeNode7, treeNode8 });
+            treeNode1.Name = "reservation_403_1";
+            treeNode1.Text = "dr hab. Adam Zielonka, prof PŚ (8:30-10:00)";
+            treeNode2.Name = "reservation_403_2";
+            treeNode2.Text = "tech. Dawid Piotrowski (12:00-13:30)";
+            treeNode3.Name = "room403";
+            treeNode3.Text = "403";
+            treeNode4.Name = "room306";
+            treeNode4.Text = "306";
+            trvReservationList.Nodes.AddRange(new TreeNode[] { treeNode3, treeNode4 });
             trvReservationList.Size = new Size(767, 388);
             trvReservationList.TabIndex = 1;
             // 
@@ -257,6 +257,7 @@
             button2.TabIndex = 5;
             button2.Text = "+";
             button2.UseVisualStyleBackColor = false;
+            button2.Click += addRoom;
             // 
             // lsbRoomList
             // 
@@ -270,6 +271,7 @@
             lsbRoomList.Name = "lsbRoomList";
             lsbRoomList.Size = new Size(726, 392);
             lsbRoomList.TabIndex = 0;
+            lsbRoomList.SelectedIndexChanged += roomSelected;
             // 
             // MainForm
             // 

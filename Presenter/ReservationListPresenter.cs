@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace dpiotrowski_lab2.Presenter.RoomList
+namespace dpiotrowski_lab2.Presenter
 {
     internal class ReservationListPresenter
     {

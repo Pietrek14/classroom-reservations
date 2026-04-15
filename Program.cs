@@ -1,6 +1,6 @@
 using dpiotrowski_lab2.Model;
-using dpiotrowski_lab2.Presenter.EmployeeList;
-using dpiotrowski_lab2.Presenter.RoomList;
+using dpiotrowski_lab2.Presenter;
+using dpiotrowski_lab2.Presenter.RoomPresenter;
 
 namespace dpiotrowski_lab2
 {
