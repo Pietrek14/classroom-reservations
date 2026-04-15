@@ -35,11 +35,11 @@
             lblFirstName = new Label();
             lblLastName = new Label();
             lblTitlePrefix = new Label();
-            lblTitlePostfix = new Label();
+            lblTitleSuffix = new Label();
             tbxFirstName = new TextBox();
             tbxLastName = new TextBox();
             tbxTitlePrefix = new TextBox();
-            tbxTitlePostfix = new TextBox();
+            tbxTitleSuffix = new TextBox();
             SuspendLayout();
             // 
             // lblEmployeeHeader
@@ -66,6 +66,7 @@
             btnAddEmployee.TabIndex = 19;
             btnAddEmployee.Text = "Dodaj prowadzącego";
             btnAddEmployee.UseVisualStyleBackColor = false;
+            btnAddEmployee.Click += addEmployee;
             // 
             // btnEditEmployee
             // 
@@ -82,6 +83,7 @@
             btnEditEmployee.Text = "Edytuj prowadzącego";
             btnEditEmployee.UseVisualStyleBackColor = false;
             btnEditEmployee.Visible = false;
+            btnEditEmployee.Click += editEmployee;
             // 
             // btnDeleteEmployee
             // 
@@ -98,6 +100,7 @@
             btnDeleteEmployee.Text = "Usuń prowadzącego";
             btnDeleteEmployee.UseVisualStyleBackColor = false;
             btnDeleteEmployee.Visible = false;
+            btnDeleteEmployee.Click += deleteEmployee;
             // 
             // lblFirstName
             // 
@@ -132,16 +135,16 @@
             lblTitlePrefix.TabIndex = 24;
             lblTitlePrefix.Text = "tytuł (prefix):";
             // 
-            // lblTitlePostfix
+            // lblTitleSuffix
             // 
-            lblTitlePostfix.AutoSize = true;
-            lblTitlePostfix.Font = new Font("Segoe UI", 10F);
-            lblTitlePostfix.ForeColor = SystemColors.Window;
-            lblTitlePostfix.Location = new Point(29, 229);
-            lblTitlePostfix.Name = "lblTitlePostfix";
-            lblTitlePostfix.Size = new Size(93, 19);
-            lblTitlePostfix.TabIndex = 25;
-            lblTitlePostfix.Text = "tytuł (postfix):";
+            lblTitleSuffix.AutoSize = true;
+            lblTitleSuffix.Font = new Font("Segoe UI", 10F);
+            lblTitleSuffix.ForeColor = SystemColors.Window;
+            lblTitleSuffix.Location = new Point(29, 229);
+            lblTitleSuffix.Name = "lblTitleSuffix";
+            lblTitleSuffix.Size = new Size(84, 19);
+            lblTitleSuffix.TabIndex = 25;
+            lblTitleSuffix.Text = "tytuł (suffix):";
             // 
             // tbxFirstName
             // 
@@ -167,13 +170,13 @@
             tbxTitlePrefix.Size = new Size(204, 29);
             tbxTitlePrefix.TabIndex = 28;
             // 
-            // tbxTitlePostfix
+            // tbxTitleSuffix
             // 
-            tbxTitlePostfix.Font = new Font("Segoe UI", 12F);
-            tbxTitlePostfix.Location = new Point(179, 223);
-            tbxTitlePostfix.Name = "tbxTitlePostfix";
-            tbxTitlePostfix.Size = new Size(204, 29);
-            tbxTitlePostfix.TabIndex = 29;
+            tbxTitleSuffix.Font = new Font("Segoe UI", 12F);
+            tbxTitleSuffix.Location = new Point(179, 223);
+            tbxTitleSuffix.Name = "tbxTitleSuffix";
+            tbxTitleSuffix.Size = new Size(204, 29);
+            tbxTitleSuffix.TabIndex = 29;
             // 
             // EmployeeForm
             // 
@@ -181,11 +184,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(30, 30, 30);
             ClientSize = new Size(800, 450);
-            Controls.Add(tbxTitlePostfix);
+            Controls.Add(tbxTitleSuffix);
             Controls.Add(tbxTitlePrefix);
             Controls.Add(tbxLastName);
             Controls.Add(tbxFirstName);
-            Controls.Add(lblTitlePostfix);
+            Controls.Add(lblTitleSuffix);
             Controls.Add(lblTitlePrefix);
             Controls.Add(lblLastName);
             Controls.Add(lblFirstName);
@@ -214,10 +217,10 @@
         private Label lblFirstName;
         private Label lblLastName;
         private Label lblTitlePrefix;
-        private Label lblTitlePostfix;
+        private Label lblTitleSuffix;
         private TextBox tbxFirstName;
         private TextBox tbxLastName;
         private TextBox tbxTitlePrefix;
-        private TextBox tbxTitlePostfix;
+        private TextBox tbxTitleSuffix;
     }
 }

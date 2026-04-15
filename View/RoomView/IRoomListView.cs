@@ -1,12 +1,11 @@
 ﻿using dpiotrowski_lab2.Presenter;
-using dpiotrowski_lab2.View.RoomView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dpiotrowski_lab2.View.Main
+namespace dpiotrowski_lab2.View.RoomView
 {
     internal interface IRoomListView
     {
@@ -18,6 +17,6 @@ namespace dpiotrowski_lab2.View.Main
         public void UpdateDepartmentList(List<ListItem> items);
         public void UpdateDepartmentAddress(String address);
         public void UpdateRoomList(List<ListItem> items);
-        public IRoomEditView OpenRoomEditView();
+        public ISingleRoomView OpenSingleRoomView();
     }
 }

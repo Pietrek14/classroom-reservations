@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <Compile Update="View\RoomView\RoomForm.cs" />
-    <Compile Update="View\EmployeeForm.cs" />
+    <Compile Update="View\EmployeeView\EmployeeForm.cs" />
   </ItemGroup>
 
 </Project>

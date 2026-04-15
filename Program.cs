@@ -1,6 +1,7 @@
 using dpiotrowski_lab2.Model;
 using dpiotrowski_lab2.Presenter;
 using dpiotrowski_lab2.Presenter.RoomPresenter;
+using dpiotrowski_lab2.Presenter.EmployeePresenter;
 
 namespace dpiotrowski_lab2
 {

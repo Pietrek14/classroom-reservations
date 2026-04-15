@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace dpiotrowski_lab2
 {
-    public partial class RoomForm : Form, IRoomEditView
+    public partial class RoomForm : Form, ISingleRoomView
     {
         public event EventHandler<RoomData>? AddRoom;
-        public event EventHandler<RoomData>? UpdateRoom;
-        public event EventHandler? RemoveRoom;
+        public event EventHandler<RoomData>? EditRoom;
+        public event EventHandler? DeleteRoom;
 
         public event EventHandler? LoadDepartmentList;
         public event EventHandler<Guid>? SelectDepartment;
@@ -108,13 +108,13 @@ namespace dpiotrowski_lab2
             var room = inputRoom();
             if (room != null)
             {
-                this.UpdateRoom?.Invoke(this, room);
+                this.EditRoom?.Invoke(this, room);
             }
         }
 
         private void deleteRoom(object sender, EventArgs e)
         {
-            this.RemoveRoom?.Invoke(this, EventArgs.Empty);
+            this.DeleteRoom?.Invoke(this, EventArgs.Empty);
         }
 
         private void loadDepartmentIntoForm()

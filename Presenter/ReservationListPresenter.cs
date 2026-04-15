@@ -2,7 +2,7 @@
 using dpiotrowski_lab2.Model.Reservations;
 using dpiotrowski_lab2.Model.Rooms;
 using dpiotrowski_lab2.Model.Rooms.Departments;
-using dpiotrowski_lab2.View.Main;
+using dpiotrowski_lab2.View.ReservationView;
 using System;
 using System.Collections.Generic;
 using System.Text;

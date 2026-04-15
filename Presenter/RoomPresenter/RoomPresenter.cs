@@ -14,9 +14,9 @@ namespace dpiotrowski_lab2.Presenter.RoomPresenter
         private IObjectList<Room> roomList;
         private Guid? roomId;
         private IObjectList<Department> departmentList;
-        private IRoomEditView view;
+        private ISingleRoomView view;
 
-        public RoomPresenter(IObjectList<Room> roomList, Guid? roomId, IObjectList<Department> departmentList, IRoomEditView view)
+        public RoomPresenter(IObjectList<Room> roomList, Guid? roomId, IObjectList<Department> departmentList, ISingleRoomView view)
         {
             this.roomList = roomList;
             this.roomId = roomId;
@@ -30,26 +30,26 @@ namespace dpiotrowski_lab2.Presenter.RoomPresenter
                 this.view.LoadRoomForEdition(new RoomData(room));
             }
 
-            this.view.LoadDepartmentList += (object? sender, EventArgs e) => UpdateDepartmentList(null, null);
-            this.view.SelectDepartment += (object? sender, Guid departmentId) => SetSelectedDepartment(departmentId);
+            this.view.LoadDepartmentList += (object? sender, EventArgs e) => updateDepartmentList(null, null);
+            this.view.SelectDepartment += (object? sender, Guid departmentId) => setSelectedDepartment(departmentId);
             this.view.AddRoom += (object? sender, RoomData roomData) => addRoom(roomData);
-            this.view.UpdateRoom += (object? sender, RoomData roomData) => editRoom(roomData);
-            this.view.RemoveRoom += (object? sender, EventArgs e) => deleteRoom();
+            this.view.EditRoom += (object? sender, RoomData roomData) => editRoom(roomData);
+            this.view.DeleteRoom += (object? sender, EventArgs e) => deleteRoom();
 
-            this.departmentList.ElementAdded += UpdateDepartmentList;
-            this.departmentList.ElementUpdated += UpdateDepartmentList;
-            this.departmentList.ElementRemoved += UpdateDepartmentList;
+            this.departmentList.ElementAdded += updateDepartmentList;
+            this.departmentList.ElementUpdated += updateDepartmentList;
+            this.departmentList.ElementRemoved += updateDepartmentList;
 
-            this.UpdateDepartmentList(null, null);
+            this.updateDepartmentList(null, null);
         }
 
-        private void UpdateDepartmentList(object? sender, Department? _)
+        private void updateDepartmentList(object? sender, Department? _)
         {
             var departmentListItems = this.departmentList.Elements.Select(department => new ListItem(department.Name, department.Id)).ToList();
             this.view.UpdateDepartmentList(departmentListItems);
         }
 
-        private void SetSelectedDepartment(Guid departmentId)
+        private void setSelectedDepartment(Guid departmentId)
         {
             var department = this.departmentList.Elements.FirstOrDefault(department => department.Id == departmentId);
             if (department == null)
@@ -107,6 +107,7 @@ namespace dpiotrowski_lab2.Presenter.RoomPresenter
             try
             {
                 this.roomList.Remove(this.roomId.Value);
+                this.roomId = null;
                 this.view.CloseView();
             }
             catch (ArgumentException ex)

@@ -185,6 +185,7 @@
             button1.TabIndex = 5;
             button1.Text = "+";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += addEmployee;
             // 
             // lsbEmployeeList
             // 
@@ -198,6 +199,7 @@
             lsbEmployeeList.Name = "lsbEmployeeList";
             lsbEmployeeList.Size = new Size(726, 476);
             lsbEmployeeList.TabIndex = 0;
+            lsbEmployeeList.SelectedIndexChanged += employeeSelected;
             // 
             // tbpRoomList
             // 

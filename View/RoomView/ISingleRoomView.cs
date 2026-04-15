@@ -6,13 +6,13 @@ using System.Text;
 
 namespace dpiotrowski_lab2.View.RoomView
 {
-    public interface IRoomEditView
+    public interface ISingleRoomView
     {
         public event EventHandler LoadDepartmentList;
         public event EventHandler<Guid> SelectDepartment;
         public event EventHandler<RoomData> AddRoom;
-        public event EventHandler<RoomData> UpdateRoom;
-        public event EventHandler RemoveRoom;
+        public event EventHandler<RoomData> EditRoom;
+        public event EventHandler DeleteRoom;
 
         public void UpdateDepartmentList(List<ListItem> items);
         public void UpdateDepartmentAddress(String address);

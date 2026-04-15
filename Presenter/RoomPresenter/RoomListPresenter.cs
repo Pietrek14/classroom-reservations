@@ -1,7 +1,7 @@
 ﻿using dpiotrowski_lab2.Model;
 using dpiotrowski_lab2.Model.Rooms;
 using dpiotrowski_lab2.Model.Rooms.Departments;
-using dpiotrowski_lab2.View.Main;
+using dpiotrowski_lab2.View.RoomView;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -36,8 +36,8 @@ namespace dpiotrowski_lab2.Presenter.RoomPresenter
 
             this.view.LoadDepartmentList += (object? sender, EventArgs e) => UpdateDepartmentList(sender, null);
             this.view.SelectDepartment += (object? sender, Guid departmentId) => SetSelectedDepartment(departmentId);
-            this.view.SelectRoomToEdit += (object? sender, Guid roomId) => OpenRoomEdit(roomId);
-            this.view.AddRoom += (object? sender, EventArgs e) => OpenRoomEdit(null);
+            this.view.SelectRoomToEdit += (object? sender, Guid roomId) => OpenSingleRoomPresenter(roomId);
+            this.view.AddRoom += (object? sender, EventArgs e) => OpenSingleRoomPresenter(null);
         }
 
         private void SetSelectedDepartment(Guid departmentId)
@@ -71,9 +71,9 @@ namespace dpiotrowski_lab2.Presenter.RoomPresenter
             this.view.UpdateDepartmentList(departmentListItems);
         }
 
-        private void OpenRoomEdit(Guid? roomId)
+        private void OpenSingleRoomPresenter(Guid? roomId)
         {
-            var roomEditView = this.view.OpenRoomEditView();
+            var roomEditView = this.view.OpenSingleRoomView();
             this.roomPresenter = new RoomPresenter(this.roomList, roomId, this.departmentList, roomEditView);
         }
     }

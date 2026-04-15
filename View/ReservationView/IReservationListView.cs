@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dpiotrowski_lab2.View.Main
+namespace dpiotrowski_lab2.View.ReservationView
 {
     internal interface IReservationListView
     {

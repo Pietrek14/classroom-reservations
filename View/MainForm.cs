@@ -1,6 +1,7 @@
 using dpiotrowski_lab2.Model;
 using dpiotrowski_lab2.Presenter;
-using dpiotrowski_lab2.View.Main;
+using dpiotrowski_lab2.View.EmployeeView;
+using dpiotrowski_lab2.View.ReservationView;
 using dpiotrowski_lab2.View.RoomView;
 using System.Diagnostics;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
@@ -13,8 +14,11 @@ namespace dpiotrowski_lab2
         public event EventHandler? LoadDepartmentList;
         public event EventHandler<Guid>? SelectDepartment;
         public event EventHandler<DateOnly>? SelectDate;
+
         public event EventHandler<Guid>? SelectRoomToEdit;
         public event EventHandler? AddRoom;
+        public event EventHandler<Guid>? SelectEmployeeToEdit;
+        public event EventHandler? AddEmployee;
 
         public MainForm()
         {
@@ -91,11 +95,18 @@ namespace dpiotrowski_lab2
             }
         }
 
-        public IRoomEditView OpenRoomEditView()
+        public ISingleRoomView OpenSingleRoomView()
         {
-            var roomEditForm = new RoomForm();
-            roomEditForm.Show();
-            return roomEditForm;
+            var singleRoomForm = new RoomForm();
+            singleRoomForm.Show();
+            return singleRoomForm;
+        }
+
+        public ISingleEmployeeView OpenSingleEmployeeView()
+        {
+            var singleEmployeeForm = new EmployeeForm();
+            singleEmployeeForm.Show();
+            return singleEmployeeForm;
         }
 
         private void departmentSelected(object sender, EventArgs e)
@@ -147,6 +158,21 @@ namespace dpiotrowski_lab2
         private void addRoom(object sender, EventArgs e)
         {
             this.AddRoom?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void employeeSelected(object sender, EventArgs e)
+        {
+            var selected = lsbEmployeeList.SelectedItem as ListItem;
+
+            if (selected != null)
+            {
+                this.SelectEmployeeToEdit?.Invoke(this, selected.Value);
+            }
+        }
+
+        private void addEmployee(object sender, EventArgs e)
+        {
+            this.AddEmployee?.Invoke(this, EventArgs.Empty);
         }
     }
 }
