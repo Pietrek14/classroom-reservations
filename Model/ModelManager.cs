@@ -39,7 +39,7 @@ namespace dpiotrowski_lab2.Model
                 new Address("Katowice", new PostalCode("40", "019"), "Zygmunta Krasińskiego", "8"))
             );
 
-            var room403 = new Room("403a", 120, RoomType.Lecture, mathematicsDepartment);
+            var room403 = new Room("403", 120, RoomType.Lecture, mathematicsDepartment);
 
             RoomList.Add(room403);
             RoomList.Add(new Room("406", 45, RoomType.Seminar, mathematicsDepartment));
@@ -56,7 +56,7 @@ namespace dpiotrowski_lab2.Model
             var reservation1 = new Reservation(
                 room403,
                 adamZielonka,
-                new DateOnly(2026, 4, 12),
+                DateOnly.FromDateTime(DateTime.Today),
                 new TimeOnly(8, 30),
                 new TimeOnly(10, 00)
             );
@@ -64,7 +64,7 @@ namespace dpiotrowski_lab2.Model
             var reservation2 = new Reservation(
                 room403,
                 dawidPiotrowski,
-                new DateOnly(2026, 4, 12),
+                DateOnly.FromDateTime(DateTime.Today),
                 new TimeOnly(12, 00),
                 new TimeOnly(13, 30)
             );
@@ -72,7 +72,7 @@ namespace dpiotrowski_lab2.Model
             var reservation3 = new Reservation(
                 room403,
                 beniaminStecula,
-                new DateOnly(2026, 4, 12),
+                DateOnly.FromDateTime(DateTime.Today),
                 new TimeOnly(13, 45),
                 new TimeOnly(15, 15)
             );
@@ -80,7 +80,7 @@ namespace dpiotrowski_lab2.Model
             var reservation4 = new Reservation(
                 room403,
                 adamZielonka,
-                new DateOnly(2026, 4, 13),
+                DateOnly.FromDateTime(DateTime.Today.AddDays(1)),
                 new TimeOnly(10, 15),
                 new TimeOnly(11, 45)
             );

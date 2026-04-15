@@ -117,6 +117,7 @@
             btnAddReservation.TabIndex = 4;
             btnAddReservation.Text = "+";
             btnAddReservation.UseVisualStyleBackColor = false;
+            btnAddReservation.Click += addReservation;
             // 
             // cmbReservationDepartmentSelection
             // 
@@ -149,6 +150,7 @@
             trvReservationList.Nodes.AddRange(new TreeNode[] { treeNode3, treeNode4 });
             trvReservationList.Size = new Size(767, 388);
             trvReservationList.TabIndex = 1;
+            trvReservationList.AfterSelect += reservationSelected;
             // 
             // tbpEmployeeList
             // 

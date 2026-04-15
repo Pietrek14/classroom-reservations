@@ -17,5 +17,10 @@ namespace dpiotrowski_lab2.Model.Rooms.Departments
             this.Name = name;
             this.Address = address;
         }
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

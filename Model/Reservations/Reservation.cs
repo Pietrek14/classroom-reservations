@@ -24,5 +24,15 @@ namespace dpiotrowski_lab2.Model.Reservations
             this.From = from;
             this.To = to;
         }
+
+        public Reservation(Guid id, Room room, Employee reservee, DateOnly date, TimeOnly from, TimeOnly to)
+        {
+            this.Id = id;
+            this.Room = room;
+            this.Reservee = reservee;
+            this.Date = date;
+            this.From = from;
+            this.To = to;
+        }
     }
 }

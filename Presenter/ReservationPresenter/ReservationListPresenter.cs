@@ -1,4 +1,5 @@
 ﻿using dpiotrowski_lab2.Model;
+using dpiotrowski_lab2.Model.Employees;
 using dpiotrowski_lab2.Model.Reservations;
 using dpiotrowski_lab2.Model.Rooms;
 using dpiotrowski_lab2.Model.Rooms.Departments;
@@ -7,13 +8,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace dpiotrowski_lab2.Presenter
+namespace dpiotrowski_lab2.Presenter.ReservationPresenter
 {
     internal class ReservationListPresenter
     {
         private IObjectList<Reservation> reservationList;
         private IObjectList<Room> roomList;
         private IObjectList<Department> departmentList;
+        private IObjectList<Employee> employeeList;
         private IReservationListView view;
 
         private Guid? selectedDepartmentId;
@@ -23,11 +25,13 @@ namespace dpiotrowski_lab2.Presenter
             IObjectList<Reservation> reservationList,
             IObjectList<Room> roomList,
             IObjectList<Department> departmentList,
+            IObjectList<Employee> employeeList,
             IReservationListView view)
         {
             this.reservationList = reservationList;
             this.roomList = roomList;
             this.departmentList = departmentList;
+            this.employeeList = employeeList;
             this.view = view;
 
             this.reservationList.ElementAdded += (object? sender, Reservation reservation) => UpdateReservationList();
@@ -47,6 +51,9 @@ namespace dpiotrowski_lab2.Presenter
             this.view.LoadDepartmentList += (object? sender, EventArgs e) => UpdateDepartmentList(sender, null);
             this.view.SelectDepartment += (object? sender, Guid departmentId) => SetSelectedDepartment(departmentId);
             this.view.SelectDate += (object? sender, DateOnly date) => SetSelectedDate(date);
+
+            this.view.SelectReservationToEdit += (object? sender, Guid reservationId) => OpenSingleReservationPresenter(reservationId);
+            this.view.AddReservation += (object? sender, EventArgs e) => OpenSingleReservationPresenter(null);
         }
 
         private void SetSelectedDepartment(Guid departmentId)
@@ -90,6 +97,18 @@ namespace dpiotrowski_lab2.Presenter
         {
             var departmentListItems = this.departmentList.Elements.Select(department => new ListItem(department.Name, department.Id)).ToList();
             this.view.UpdateDepartmentList(departmentListItems);
+        }
+
+        private void OpenSingleReservationPresenter(Guid? reservationId)
+        {
+            var reservationEditView = this.view.OpenSingleReservationView();
+            var reservationPresenter = new ReservationPresenter(
+                this.reservationList,
+                reservationId,
+                this.departmentList,
+                this.roomList,
+                this.employeeList,
+                reservationEditView);
         }
     }
 }

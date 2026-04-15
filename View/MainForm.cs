@@ -19,6 +19,9 @@ namespace dpiotrowski_lab2
         public event EventHandler? AddRoom;
         public event EventHandler<Guid>? SelectEmployeeToEdit;
         public event EventHandler? AddEmployee;
+        public event EventHandler<Guid>? SelectReservationToEdit;
+        public event EventHandler? AddReservation;
+
 
         public MainForm()
         {
@@ -72,6 +75,7 @@ namespace dpiotrowski_lab2
                 foreach (var reservation in department.Value)
                 {
                     TreeNode reservationNode = new TreeNode(reservation.Display);
+                    reservationNode.Tag = reservation.Value;
                     departmentNode.Nodes.Add(reservationNode);
                 }
                 this.trvReservationList.Nodes.Add(departmentNode);
@@ -107,6 +111,13 @@ namespace dpiotrowski_lab2
             var singleEmployeeForm = new EmployeeForm();
             singleEmployeeForm.Show();
             return singleEmployeeForm;
+        }
+
+        public ISingleReservationView OpenSingleReservationView()
+        {
+            var singleReservationForm = new ReservationForm();
+            singleReservationForm.Show();
+            return singleReservationForm;
         }
 
         private void departmentSelected(object sender, EventArgs e)
@@ -173,6 +184,26 @@ namespace dpiotrowski_lab2
         private void addEmployee(object sender, EventArgs e)
         {
             this.AddEmployee?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void reservationSelected(object sender, TreeViewEventArgs e)
+        {
+            if(e.Node == null)
+            {
+                return;
+            }
+
+            var selected = e.Node.Tag as Guid?;
+
+            if (selected != null)
+            {
+                this.SelectReservationToEdit?.Invoke(this, selected.Value);
+            }
+        }
+
+        private void addReservation(object sender, EventArgs e)
+        {
+            this.AddReservation?.Invoke(this, EventArgs.Empty);
         }
     }
 }

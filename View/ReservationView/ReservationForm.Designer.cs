@@ -66,6 +66,7 @@
             cmbDepartment.Size = new Size(281, 28);
             cmbDepartment.TabIndex = 4;
             cmbDepartment.Text = "Wydział Matematyki Stosowanej";
+            cmbDepartment.SelectedIndexChanged += selectedDepartment;
             // 
             // lblDepartmentAddress
             // 
@@ -98,6 +99,7 @@
             cmbRoom.Size = new Size(281, 28);
             cmbRoom.TabIndex = 9;
             cmbRoom.Text = "406";
+            cmbRoom.SelectedIndexChanged += selectedRoom;
             // 
             // lblRoomCapacity
             // 
@@ -196,6 +198,7 @@
             btnAddReservation.TabIndex = 19;
             btnAddReservation.Text = "Dodaj rezerwację";
             btnAddReservation.UseVisualStyleBackColor = false;
+            btnAddReservation.Click += addReservation;
             // 
             // btnEditReservation
             // 
@@ -212,6 +215,7 @@
             btnEditReservation.Text = "Edytuj rezerwację";
             btnEditReservation.UseVisualStyleBackColor = false;
             btnEditReservation.Visible = false;
+            btnEditReservation.Click += editReservation;
             // 
             // btnDeleteReservation
             // 
@@ -228,6 +232,7 @@
             btnDeleteReservation.Text = "Usuń rezerwację";
             btnDeleteReservation.UseVisualStyleBackColor = false;
             btnDeleteReservation.Visible = false;
+            btnDeleteReservation.Click += deleteReservation;
             // 
             // ReservationForm
             // 
