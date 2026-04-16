@@ -3,6 +3,7 @@ using dpiotrowski_lab2.Model.Rooms;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace dpiotrowski_lab2.Model.Reservations
 {
@@ -25,6 +26,7 @@ namespace dpiotrowski_lab2.Model.Reservations
             this.To = to;
         }
 
+        [JsonConstructor]
         public Reservation(Guid id, Room room, Employee reservee, DateOnly date, TimeOnly from, TimeOnly to)
         {
             this.Id = id;

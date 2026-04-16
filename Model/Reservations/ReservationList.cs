@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace dpiotrowski_lab2.Model.Reservations
 {
-    internal class ReservationList : IObjectList<Reservation>
+    public class ReservationList : IObjectList<Reservation>
     {
         private Dictionary<Guid, Reservation> reservations;
         public List<Reservation> Elements { get => reservations.Values.ToList(); }

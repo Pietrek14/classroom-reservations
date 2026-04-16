@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace dpiotrowski_lab2.Model.Rooms
 {
-    internal class RoomList : IObjectList<Room>
+    public class RoomList : IObjectList<Room>
     {
         private Dictionary<Guid, Room> rooms;
         public List<Room> Elements { get => rooms.Values.ToList(); }
@@ -25,7 +27,9 @@ namespace dpiotrowski_lab2.Model.Rooms
 
         public void Add(Room room)
         {
+            Debug.WriteLine($"Adding room: {room}");
             this.rooms.Add(room.Id, room);
+            Debug.WriteLine($"There are now {this.rooms.Count} rooms.");
             
             this.ElementAdded?.Invoke(this, room);
         }

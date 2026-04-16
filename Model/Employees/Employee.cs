@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace dpiotrowski_lab2.Model.Employees
 {
@@ -21,6 +22,7 @@ namespace dpiotrowski_lab2.Model.Employees
             this.Title = title;
         }
 
+        [JsonConstructor]
         public Employee(Guid id, String firstName, String lastName, Title title)
         {
             this.Id = id;

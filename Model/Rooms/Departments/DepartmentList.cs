@@ -5,7 +5,7 @@ using System.Text;
 
 namespace dpiotrowski_lab2.Model.Rooms
 {
-    internal class DepartmentList : IObjectList<Department>
+    public class DepartmentList : IObjectList<Department>
     {
         private Dictionary<Guid, Department> departments;
         public List<Department> Elements { get => departments.Values.ToList(); }

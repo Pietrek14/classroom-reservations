@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace dpiotrowski_lab2.Model.Rooms
 {
@@ -22,6 +23,7 @@ namespace dpiotrowski_lab2.Model.Rooms
             this.Department = department;
         }
 
+        [JsonConstructor]
         public Room(Guid id, string number, uint capacity, RoomType roomType, Department department)
         {
             this.Id = id;

@@ -60,7 +60,10 @@ namespace dpiotrowski_lab2
             {
                 this.cmbRoom.Items.Add(item);
             }
-            this.cmbRoom.SelectedIndex = 0;
+            if(rooms.Count > 0)
+            {
+                this.cmbRoom.SelectedIndex = 0;
+            }
         }
 
         public void UpdateRoomDetails(String roomType, uint capacity)

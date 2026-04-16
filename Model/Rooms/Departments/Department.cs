@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace dpiotrowski_lab2.Model.Rooms.Departments
 {
@@ -14,6 +15,14 @@ namespace dpiotrowski_lab2.Model.Rooms.Departments
         public Department(String name, Address address)
         {
             this.Id = Guid.NewGuid();
+            this.Name = name;
+            this.Address = address;
+        }
+
+        [JsonConstructor]
+        public Department(Guid id, String name, Address address)
+        {
+            this.Id = id;
             this.Name = name;
             this.Address = address;
         }

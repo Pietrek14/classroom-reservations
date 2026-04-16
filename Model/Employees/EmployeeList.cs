@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace dpiotrowski_lab2.Model.Employees
 {
-    internal class EmployeeList : IObjectList<Employee>
+    public class EmployeeList : IObjectList<Employee>
     {
         private Dictionary<Guid, Employee> employees;
         public List<Employee> Elements { get => employees.Values.ToList(); }

@@ -13,10 +13,10 @@ namespace dpiotrowski_lab2.Model
 {
     public class ModelManager
     {
-        public IObjectList<Employee> EmployeeList { get; set; }
-        public IObjectList<Room> RoomList { get; set; }
-        public IObjectList<Reservation> ReservationList { get; set; }
-        public IObjectList<Department> DepartmentList { get; set; }
+        public EmployeeList EmployeeList { get; set; }
+        public RoomList RoomList { get; set; }
+        public ReservationList ReservationList { get; set; }
+        public DepartmentList DepartmentList { get; set; }
 
         public ModelManager()
         {
@@ -25,70 +25,62 @@ namespace dpiotrowski_lab2.Model
             ReservationList = new ReservationList();
             DepartmentList = new DepartmentList();
 
+            // We have to hard-code the deparments' IDs so they can persist
             var mathematicsDepartment = new Department(
+                new Guid("00000000-0000-0000-0000-000000000000"),
                 "Wydział Matematyki Stosowanej",
                 new Address("Gliwice", new PostalCode("44", "100"), "Kaszubska", "23"));
 
             DepartmentList.Add(mathematicsDepartment);
             DepartmentList.Add(new Department(
+                new Guid("00000000-0000-0000-0000-000000000001"),
                 "Wydział Automatyki, Elektroniki i Informatyki",
                 new Address("Gliwice", new PostalCode("44", "100"), "Akademicka", "16"))
             );
             DepartmentList.Add(new Department(
+                new Guid("00000000-0000-0000-0000-000000000002"),
                 "Wydział Transportu i Inżynierii Lotniczej",
                 new Address("Katowice", new PostalCode("40", "019"), "Zygmunta Krasińskiego", "8"))
             );
+        }
 
-            var room403 = new Room("403", 120, RoomType.Lecture, mathematicsDepartment);
+        public void Persist(string employeeListFilePath, string roomListFilePath, string reservationListFilePath)
+        {
+            var employeeListSerializer = new ObjectListSerializer<EmployeeList, Employee>(employeeListFilePath);
+            var roomListSerializer = new ObjectListSerializer<RoomList, Room>(roomListFilePath);
+            var reservationListSerializer = new ObjectListSerializer<ReservationList, Reservation>(reservationListFilePath);
 
-            RoomList.Add(room403);
-            RoomList.Add(new Room("406", 45, RoomType.Seminar, mathematicsDepartment));
-            RoomList.Add(new Room("306", 30, RoomType.Computer, mathematicsDepartment));
+            var deserializedEmployeeList = employeeListSerializer.Deserialize();
+            var deserializedRoomList = roomListSerializer.Deserialize();
+            var deserializedReservationList = reservationListSerializer.Deserialize();
 
-            var adamZielonka = new Employee("Adam", "Zielonka", new Title("dr hab.", "prof. PŚ"));
-            var dawidPiotrowski = new Employee("Dawid", "Piotrowski", new Title("tech.", ""));
-            var beniaminStecula = new Employee("Beniamin", "Stecuła", new Title("mgr² inż.", ""));
+            this.EmployeeList = deserializedEmployeeList ?? new EmployeeList();
+            this.RoomList = deserializedRoomList ?? new RoomList();
+            this.ReservationList = deserializedReservationList ?? new ReservationList();
 
-            EmployeeList.Add(adamZielonka);
-            EmployeeList.Add(dawidPiotrowski);
-            EmployeeList.Add(beniaminStecula);
+            this.EmployeeList.ElementAdded += (sender, employee) => employeeListSerializer.Serialize(this.EmployeeList);
+            this.EmployeeList.ElementUpdated += (sender, employee) => employeeListSerializer.Serialize(this.EmployeeList);
+            this.EmployeeList.ElementRemoved += (sender, employee) => employeeListSerializer.Serialize(this.EmployeeList);
 
-            var reservation1 = new Reservation(
-                room403,
-                adamZielonka,
-                DateOnly.FromDateTime(DateTime.Today),
-                new TimeOnly(8, 30),
-                new TimeOnly(10, 00)
-            );
+            this.RoomList.ElementAdded += (sender, room) => roomListSerializer.Serialize(this.RoomList);
+            this.RoomList.ElementUpdated += (sender, room) => roomListSerializer.Serialize(this.RoomList);
+            this.RoomList.ElementRemoved += (sender, room) => roomListSerializer.Serialize(this.RoomList);
+            this.DepartmentList.ElementAdded += (sender, department) => roomListSerializer.Serialize(this.RoomList);
+            this.DepartmentList.ElementUpdated += (sender, department) => roomListSerializer.Serialize(this.RoomList);
+            this.DepartmentList.ElementRemoved += (sender, department) => roomListSerializer.Serialize(this.RoomList);
 
-            var reservation2 = new Reservation(
-                room403,
-                dawidPiotrowski,
-                DateOnly.FromDateTime(DateTime.Today),
-                new TimeOnly(12, 00),
-                new TimeOnly(13, 30)
-            );
-
-            var reservation3 = new Reservation(
-                room403,
-                beniaminStecula,
-                DateOnly.FromDateTime(DateTime.Today),
-                new TimeOnly(13, 45),
-                new TimeOnly(15, 15)
-            );
-
-            var reservation4 = new Reservation(
-                room403,
-                adamZielonka,
-                DateOnly.FromDateTime(DateTime.Today.AddDays(1)),
-                new TimeOnly(10, 15),
-                new TimeOnly(11, 45)
-            );
-
-            ReservationList.Add(reservation1);
-            ReservationList.Add(reservation3);
-            ReservationList.Add(reservation2);
-            ReservationList.Add(reservation4);
+            this.ReservationList.ElementAdded += (sender, reservation) => reservationListSerializer.Serialize(this.ReservationList);
+            this.ReservationList.ElementUpdated += (sender, reservation) => reservationListSerializer.Serialize(this.ReservationList);
+            this.ReservationList.ElementRemoved += (sender, reservation) => reservationListSerializer.Serialize(this.ReservationList);
+            this.EmployeeList.ElementAdded += (sender, reservation) => reservationListSerializer.Serialize(this.ReservationList);
+            this.EmployeeList.ElementUpdated += (sender, reservation) => reservationListSerializer.Serialize(this.ReservationList);
+            this.EmployeeList.ElementRemoved += (sender, reservation) => reservationListSerializer.Serialize(this.ReservationList);
+            this.RoomList.ElementAdded += (sender, reservation) => reservationListSerializer.Serialize(this.ReservationList);
+            this.RoomList.ElementUpdated += (sender, reservation) => reservationListSerializer.Serialize(this.ReservationList);
+            this.RoomList.ElementRemoved += (sender, reservation) => reservationListSerializer.Serialize(this.ReservationList);
+            this.DepartmentList.ElementAdded += (sender, reservation) => reservationListSerializer.Serialize(this.ReservationList);
+            this.DepartmentList.ElementUpdated += (sender, reservation) => reservationListSerializer.Serialize(this.ReservationList);
+            this.DepartmentList.ElementRemoved += (sender, reservation) => reservationListSerializer.Serialize(this.ReservationList);
         }
     }
 }

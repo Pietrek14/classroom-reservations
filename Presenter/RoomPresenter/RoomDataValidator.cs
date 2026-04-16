@@ -38,6 +38,11 @@ namespace dpiotrowski_lab2.Presenter.RoomPresenter
                     throw new ArgumentException("Nieprawidłowy typ sali. Dozwolone wartości to: wykładowa, komputerowa, ćwiczeniowa.");
             }
 
+            if(roomData.Capacity <= 0)
+            {
+                throw new ArgumentException("Pojemność sali musi być większa od zera.");
+            }
+
             return new Room(id, roomData.RoomNumber, roomData.Capacity, roomType, department);
         }
     }
