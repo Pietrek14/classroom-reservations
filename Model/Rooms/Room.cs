@@ -1,4 +1,5 @@
 ﻿using dpiotrowski_lab2.Model.Rooms.Departments;
+using dpiotrowski_lab2.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -43,8 +44,9 @@ namespace dpiotrowski_lab2.Model.Rooms
                 _ => throw new NotImplementedException()
             };
 
-            // TODO: poprawne odmienianie rzeczownika
-            return $"{this.Number} (sala {typeString}, {this.Capacity} miejsc)";
+            var pluralizerService = new PolishPluralizerService("miejsce", "miejsca", "miejsc");
+
+            return $"{this.Number} (sala {typeString}, {this.Capacity} {pluralizerService.Pluralize((int)this.Capacity)})";
         }
     }
 }

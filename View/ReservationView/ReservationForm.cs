@@ -1,5 +1,6 @@
 ﻿using dpiotrowski_lab2.Presenter;
 using dpiotrowski_lab2.Presenter.ReservationPresenter;
+using dpiotrowski_lab2.Service;
 using dpiotrowski_lab2.View.ReservationView;
 using System;
 using System.Collections.Generic;
@@ -69,8 +70,10 @@ namespace dpiotrowski_lab2
         public void UpdateRoomDetails(String roomType, uint capacity)
         {
             this.lblRoomType.Text = $"Sala {roomType}";
-            // TODO: poprawne odmienianie rzeczownika
-            this.lblRoomCapacity.Text = $"Pojemność: {capacity} miejsc";
+
+            var pluralizerService = new PolishPluralizerService("miejsce", "miejsca", "miejsc");
+
+            this.lblRoomCapacity.Text = $"Pojemność: {capacity} {pluralizerService.Pluralize((int)capacity)}";
         }
 
         public void LoadReservationForEdition(ReservationData reservation)

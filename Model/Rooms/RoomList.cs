@@ -27,9 +27,7 @@ namespace dpiotrowski_lab2.Model.Rooms
 
         public void Add(Room room)
         {
-            Debug.WriteLine($"Adding room: {room}");
             this.rooms.Add(room.Id, room);
-            Debug.WriteLine($"There are now {this.rooms.Count} rooms.");
             
             this.ElementAdded?.Invoke(this, room);
         }
